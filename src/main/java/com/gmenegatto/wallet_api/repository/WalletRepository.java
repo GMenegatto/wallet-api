@@ -44,7 +44,7 @@ public interface WalletRepository extends JpaRepository<Wallet, Long> {
 
     @Query(
             nativeQuery = true,
-            value = "select sum(case when wa.type = 'CREDIT' then value " + //
+            value = "select coalesce( (select sum(case when wa.type = 'CREDIT' then value " + //
                     "                when wa.type = 'DEBIT' then - value " + //
                     "                else 0" + //
                     "           end) from wlt_wallets w " + //
@@ -52,7 +52,7 @@ public interface WalletRepository extends JpaRepository<Wallet, Long> {
                     "       join wlt_wallets_settlements wa on w.id = wa.wlt_wallet_id " + //
                     "   where w.id = :walletId " + //
                     "       and w.active = true " + //
-                    "       and u.active = true")
+                    "       and u.active = true),0)")
     BigDecimal getBalance(@Param("walletId") Long walletId);
 
 }

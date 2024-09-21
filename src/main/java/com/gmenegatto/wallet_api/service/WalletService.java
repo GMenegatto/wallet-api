@@ -15,6 +15,6 @@ public class WalletService {
 
     public BalanceResponseDTO getBalance(final Long userId) {
         return new BalanceResponseDTO(walletRepository.getBalance(walletRepository.findActiveWalletByUserId(userId)
-                .orElseThrow(() -> new RuntimeException("Wallet nof found")).getId()));
+                .orElseThrow(() -> new RuntimeException("Wallet not found")).getId()));
     }
 }

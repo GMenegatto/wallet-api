@@ -1,7 +1,6 @@
 package com.gmenegatto.wallet_api.service.authorization;
 
 import com.gmenegatto.wallet_api.domain.authorization.AuthorizationServiceResponse;
-import com.gmenegatto.wallet_api.domain.wallet.Transaction;
 import com.gmenegatto.wallet_api.exception.UnauthorizedTransactionException;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClient;
