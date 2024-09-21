@@ -88,5 +88,11 @@ public class Transaction extends BaseEntity {
         return newTransaction;
     }
 
-
+    @Override
+    public String toString() {
+        return "Transaction{" +
+                "id=" + id +
+                ", value=" + value +
+                '}';
+    }
 }

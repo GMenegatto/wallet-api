@@ -4,6 +4,8 @@ import com.gmenegatto.wallet_api.domain.base.BaseEntity;
 import com.gmenegatto.wallet_api.domain.user.User;
 import jakarta.persistence.*;
 
+import java.util.Objects;
+
 @Table(name = "wlt_wallets")
 @Entity
 public class Wallet extends BaseEntity {
@@ -33,5 +35,18 @@ public class Wallet extends BaseEntity {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Wallet wallet = (Wallet) o;
+        return id.equals(wallet.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 }

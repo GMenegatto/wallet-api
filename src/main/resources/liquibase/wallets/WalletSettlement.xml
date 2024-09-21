@@ -22,7 +22,6 @@
                 <constraints nullable="false"/>
             </column>
             <column name="wlt_transaction_id" type="bigint">
-                <constraints nullable="false"/>
             </column>
             <column name="type" type="text">
                 <constraints nullable="false"/>
@@ -47,6 +46,22 @@
                                   constraintName="fk__wlt_wallets_settlements__wlt_transaction_id"
                                   referencedColumnNames="id"
                                   referencedTableName="wlt_transactions"/>
+    </changeSet>
+
+    <changeSet id="7495c308-9610-4140-bff5-ec9f9e566bb5" author="gabrielMenegatto">
+        <insert tableName="wlt_wallets_settlements">
+            <column name="active" valueBoolean="true"/>
+            <column name="wlt_wallet_id" value="1"/>
+            <column name="type" value="CREDIT"/>
+            <column name="value" value="500.00"/>
+        </insert>
+
+        <insert tableName="wlt_wallets_settlements">
+            <column name="active" valueBoolean="true"/>
+            <column name="wlt_wallet_id" value="2"/>
+            <column name="type" value="CREDIT"/>
+            <column name="value" value="500.00"/>
+        </insert>
     </changeSet>
 
 
