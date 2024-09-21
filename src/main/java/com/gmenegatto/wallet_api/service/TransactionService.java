@@ -23,12 +23,14 @@ public class TransactionService {
     final TransactionRepository transactionRepository;
     final WalletSettlementService walletSettlementService;
     final AuthorizerService authorizerService;
+    final NotificationService notificationService;
 
-    public TransactionService(WalletRepository walletRepository, TransactionRepository transactionRepository, WalletSettlementService walletSettlementService, AuthorizerService authorizerService) {
+    public TransactionService(WalletRepository walletRepository, TransactionRepository transactionRepository, WalletSettlementService walletSettlementService, AuthorizerService authorizerService, NotificationService notificationService) {
         this.walletRepository = walletRepository;
         this.transactionRepository = transactionRepository;
         this.walletSettlementService = walletSettlementService;
         this.authorizerService = authorizerService;
+        this.notificationService = notificationService;
     }
 
     public Optional<Transaction> create(final TransactionRequestDTO dto) {
@@ -59,6 +61,8 @@ public class TransactionService {
                 .orElseThrow(() -> new RuntimeException("TODO")).orElseThrow();
 
         authorizerService.authorize();
+
+        notificationService.notify(transaction);
 
         return Optional.of(newTransaction);
     }
