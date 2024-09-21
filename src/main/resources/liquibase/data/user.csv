@@ -1,0 +1,3 @@
+active,cpf,email,password,type,full_name
+true,11111111111,gabriel@email.com,senha,COMMON,Gabriel Menegatto
+true,22222222222,joao@email.com,senha,SELLER,João Menegatto

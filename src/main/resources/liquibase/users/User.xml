@@ -6,26 +6,48 @@
     http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
 
     <changeSet id="a432b047-86d5-4d51-85ed-aecd3ddc5279" author="gabrielMenegatto">
-        <createTable tableName="users">
-            <column name="id" type="bigint">
+        <createTable tableName="usr_users">
+            <column name="id" autoIncrement="true" type="bigint">
                 <constraints primaryKey="true"/>
             </column>
-            <column name="cpf" type="string">
-                <constraints nullable="false" unique="true"/>
-            </column>
-            <column name="email" type="string">
-                <constraints nullable="false" unique="true"/>
-            </column>
-            <column name="password" type="string">
+            <column name="active" defaultValueBoolean="true" type="boolean">
                 <constraints nullable="false"/>
             </column>
-            <column name="type" type="string">
+            <column name="created_date" type="TIMESTAMP" defaultValueComputed="CURRENT_TIMESTAMP">
                 <constraints nullable="false"/>
             </column>
-            <column name="full_name" type="string">
+            <column name="updated_at" type="TIMESTAMP"/>
+            <!--Base-->
+            <column name="cpf" type="text">
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="email" type="text">
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="password" type="text">
+                <constraints nullable="false"/>
+            </column>
+            <column name="type" type="text">
+                <constraints nullable="false"/>
+            </column>
+            <column name="full_name" type="text">
                 <constraints nullable="false"/>
             </column>
         </createTable>
+    </changeSet>
+
+    <changeSet id="2d969991-3cfa-4770-a9e0-8de8b91cda57" author="gabrielMenegatto">
+        <loadData
+                file="liquibase/data/user.csv"
+                tableName="usr_users"
+                separator=",">
+            <column header="active" type="boolean"/>
+            <column header="cpf" type="string"/>
+            <column header="email" type="string"/>
+            <column header="password" type="string"/>
+            <column header="type" type="string"/>
+            <column header="full_name" type="string"/>
+        </loadData>
     </changeSet>
 
 </databaseChangeLog>

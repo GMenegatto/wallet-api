@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+    http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <changeSet id="b8302629-e1bb-4fdf-a13a-d724d18ff4c7" author="gabrielMenegatto">
+        <createTable tableName="wlt_wallets">
+            <column name="id" autoIncrement="true" type="bigint">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="active" defaultValueBoolean="true" type="boolean">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_date" type="TIMESTAMP" defaultValueComputed="CURRENT_TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated_at" type="TIMESTAMP"/>
+            <!--Base-->
+            <column name="usr_user_id" type="bigint">
+                <constraints nullable="false" unique="true"/>
+            </column>
+        </createTable>
+
+        <createIndex indexName="idx__wlt_wallets__usr_user_id" tableName="wlt_wallets">
+            <column name="usr_user_id"/>
+        </createIndex>
+
+        <addForeignKeyConstraint  baseColumnNames="usr_user_id"
+                                  baseTableName="wlt_wallets"
+                                  constraintName="fk__wlt_wallets__usr_user_id"
+                                  referencedColumnNames="id"
+                                  referencedTableName="usr_users"/>
+    </changeSet>
+
+
+</databaseChangeLog>

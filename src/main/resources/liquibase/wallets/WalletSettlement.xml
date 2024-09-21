@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+    http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <changeSet id="359dbcc2-354d-461d-8535-1de6ea84f87f" author="gabrielMenegatto">
+        <createTable tableName="wlt_wallets_settlements">
+            <column name="id" autoIncrement="true" type="bigint">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="active" defaultValueBoolean="true" type="boolean">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_date" type="TIMESTAMP" defaultValueComputed="CURRENT_TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated_at" type="TIMESTAMP"/>
+            <!--Base-->
+            <column name="wlt_wallet_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="wlt_transaction_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="type" type="text">
+                <constraints nullable="false"/>
+            </column>
+            <column name="value" type="decimal(10,2)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <createIndex indexName="idx__wlt_wallets_settlements__wlt_transaction_id" tableName="wlt_wallets_settlements">
+            <column name="wlt_transaction_id"/>
+        </createIndex>
+
+        <addForeignKeyConstraint  baseColumnNames="wlt_wallet_id"
+                                  baseTableName="wlt_wallets_settlements"
+                                  constraintName="fk__wlt_wallets_settlements__wlt_wallet_id"
+                                  referencedColumnNames="id"
+                                  referencedTableName="wlt_wallets"/>
+
+        <addForeignKeyConstraint  baseColumnNames="wlt_transaction_id"
+                                  baseTableName="wlt_wallets_settlements"
+                                  constraintName="fk__wlt_wallets_settlements__wlt_transaction_id"
+                                  referencedColumnNames="id"
+                                  referencedTableName="wlt_transactions"/>
+    </changeSet>
+
+
+</databaseChangeLog>
