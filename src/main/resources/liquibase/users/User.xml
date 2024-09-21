@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+    http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <changeSet id="a432b047-86d5-4d51-85ed-aecd3ddc5279" author="gabrielMenegatto">
+        <createTable tableName="users">
+            <column name="id" type="bigint">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="cpf" type="string">
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="email" type="string">
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="password" type="string">
+                <constraints nullable="false"/>
+            </column>
+            <column name="type" type="string">
+                <constraints nullable="false"/>
+            </column>
+            <column name="full_name" type="string">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+</databaseChangeLog>
