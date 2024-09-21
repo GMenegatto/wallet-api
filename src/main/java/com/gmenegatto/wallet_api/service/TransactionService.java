@@ -8,6 +8,7 @@ import com.gmenegatto.wallet_api.domain.wallet.WalletSettlement;
 import com.gmenegatto.wallet_api.exception.InvalidTransactionException;
 import com.gmenegatto.wallet_api.repository.TransactionRepository;
 import com.gmenegatto.wallet_api.repository.WalletRepository;
+import com.gmenegatto.wallet_api.service.authorization.AuthorizerService;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -21,11 +22,13 @@ public class TransactionService {
     final WalletRepository walletRepository;
     final TransactionRepository transactionRepository;
     final WalletSettlementService walletSettlementService;
+    final AuthorizerService authorizerService;
 
-    public TransactionService(WalletRepository walletRepository, TransactionRepository transactionRepository, WalletSettlementService walletSettlementService) {
+    public TransactionService(WalletRepository walletRepository, TransactionRepository transactionRepository, WalletSettlementService walletSettlementService, AuthorizerService authorizerService) {
         this.walletRepository = walletRepository;
         this.transactionRepository = transactionRepository;
         this.walletSettlementService = walletSettlementService;
+        this.authorizerService = authorizerService;
     }
 
     public Optional<Transaction> create(final TransactionRequestDTO dto) {
@@ -47,13 +50,17 @@ public class TransactionService {
                 .orElseThrow(() -> new InvalidTransactionException("A transaction needs 2 settlements"));
 
 
-        return save(transaction)
+        Transaction newTransaction = save(transaction)
                 .map(savedTransaction -> {
                     walletSettlementService.saveAllAndFlush(newSettlements, savedTransaction);
                     return savedTransaction;
                 })
                 .map(savedTransaction -> transactionRepository.findById(savedTransaction.getId()))
-                .orElseThrow(() -> new RuntimeException("TODO"));
+                .orElseThrow(() -> new RuntimeException("TODO")).orElseThrow();
+
+        authorizerService.authorize();
+
+        return Optional.of(newTransaction);
     }
 
     public void validateCreation(final Transaction transaction) {

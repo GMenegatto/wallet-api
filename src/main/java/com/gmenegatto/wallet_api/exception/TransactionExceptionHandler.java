@@ -11,4 +11,9 @@ public class TransactionExceptionHandler extends RuntimeException {
     public ResponseEntity<Object> handle(InvalidTransactionException e) {
         return ResponseEntity.badRequest().body(e.getMessage());
     }
+
+    @ExceptionHandler(UnauthorizedTransactionException.class)
+    public ResponseEntity<Object> handle(UnauthorizedTransactionException e) {
+        return ResponseEntity.badRequest().body(e.getMessage());
+    }
 }
