@@ -21,46 +21,34 @@
             <column name="value" type="decimal(10,2)">
                 <constraints nullable="false" />
             </column>
-            <column name="usr_payee_user_id" type="bigint">
+            <column name="wlt_payee_wallet_id" type="bigint">
                 <constraints nullable="false" />
             </column>
-            <column name="usr_payer_user_id" type="bigint">
-                <constraints nullable="false" />
-            </column>
-            <column name="wlt_wallet_id" type="bigint">
+            <column name="wlt_payer_wallet_id" type="bigint">
                 <constraints nullable="false" />
             </column>
         </createTable>
 
-        <createIndex indexName="idx__wlt_transactions__wlt_wallet_id" tableName="wlt_transactions">
-            <column name="wlt_wallet_id"/>
+        <createIndex indexName="idx__wlt_transactions__wlt_payer_wallet_id" tableName="wlt_transactions">
+            <column name="wlt_payer_wallet_id"/>
         </createIndex>
 
-        <createIndex indexName="idx__wlt_transactions__usr_payer_user_id" tableName="wlt_transactions">
-            <column name="usr_payer_user_id"/>
+        <createIndex indexName="idx__wlt_transactions__wlt_payee_wallet_id" tableName="wlt_transactions">
+            <column name="wlt_payee_wallet_id"/>
         </createIndex>
 
-        <createIndex indexName="idx__wlt_transactions__usr_payee_user_id" tableName="wlt_transactions">
-            <column name="usr_payee_user_id"/>
-        </createIndex>
-
-        <addForeignKeyConstraint  baseColumnNames="usr_payer_user_id"
+        <addForeignKeyConstraint  baseColumnNames="wlt_payer_wallet_id"
                                   baseTableName="wlt_transactions"
-                                  constraintName="fk__wlt_transactions__usr_payer_user_id"
-                                  referencedColumnNames="id"
-                                  referencedTableName="usr_users"/>
-
-        <addForeignKeyConstraint  baseColumnNames="usr_payee_user_id"
-                                  baseTableName="wlt_transactions"
-                                  constraintName="fk__wlt_transactions__usr_payee_user_id"
-                                  referencedColumnNames="id"
-                                  referencedTableName="usr_users"/>
-
-        <addForeignKeyConstraint  baseColumnNames="wlt_wallet_id"
-                                  baseTableName="wlt_transactions"
-                                  constraintName="fk__wlt_transactions__wlt_wallet_id"
+                                  constraintName="fk__wlt_transactions__wlt_payer_wallet_id"
                                   referencedColumnNames="id"
                                   referencedTableName="wlt_wallets"/>
+
+        <addForeignKeyConstraint  baseColumnNames="wlt_payee_wallet_id"
+                                  baseTableName="wlt_transactions"
+                                  constraintName="fk__wlt_transactions__wlt_payee_wallet_id"
+                                  referencedColumnNames="id"
+                                  referencedTableName="wlt_wallets"/>
+
     </changeSet>
 
 

@@ -34,5 +34,15 @@
                                   referencedTableName="usr_users"/>
     </changeSet>
 
+    <changeSet id="765dea9c-eac8-4379-96c2-484eb927449c" author="gabrielMenegatto">
+        <loadData
+                file="liquibase/data/wallet.csv"
+                tableName="wlt_wallets"
+                separator=",">
+            <column header="active" type="boolean"/>
+            <column header="usr_user_id" type="numeric"/>
+        </loadData>
+    </changeSet>
+
 
 </databaseChangeLog>
