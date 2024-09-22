@@ -20,6 +20,7 @@ Este projeto é uma API de gestão de carteiras (wallets) desenvolvida com Sprin
 
 ### 1. **Registrar Transação**
 
+- **Documentação Swagger**: `http://localhost:8080/swagger-ui/index.html#/`
 - **URL**: `/transactions`
 - **Método**: `POST`
 - **Body**:
