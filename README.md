@@ -2,7 +2,7 @@
 
 ## Descrição
 
-Este projeto é uma API de gestão de carteiras (wallets) desenvolvida com Spring Boot, Liquibase e Kafka. O objetivo é gerenciar transações financeiras de usuários, permitindo registrar transações, consultar saldos de carteiras e enviar notificações em tempo real via Kafka.
+Este projeto é uma API de gestão de carteiras (wallets) desenvolvida com Spring Boot, Liquibase, Kafka e Redis para controle de Idempotência. O objetivo é gerenciar transações financeiras de usuários, permitindo registrar transações, consultar saldos de carteiras e enviar notificações em tempo real via Kafka.
 
 ## Requisitos
 

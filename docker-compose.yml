@@ -17,6 +17,11 @@ services:
       - postgres
     restart: unless-stopped
 
+  redis:
+    image: redis:latest
+    ports:
+      - "6379:6379"
+
   kafka:
     image: 'bitnami/kafka:latest'
     ports:
